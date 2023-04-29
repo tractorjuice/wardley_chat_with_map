@@ -97,7 +97,7 @@ if st.session_state.get('current_map_id') != map_id:
     st.session_state['messages'] = get_initial_message()
 
 if 'map_text' in st.session_state:
-    st.sidebar.write(st.session_state['map_text']
+    st.sidebar.write(st.session_state['map_text'])
     
 if query:
     with st.spinner("generating..."):
