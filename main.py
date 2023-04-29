@@ -1,80 +1,74 @@
+# Importing required packages
 import streamlit as st
-import requests
-from langchain.prompts import PromptTemplate
-from langchain.llms import OpenAI
-from langchain.chat_models import ChatOpenAI
-from langchain.prompts.chat import (
-    ChatPromptTemplate,
-    SystemMessagePromptTemplate,
-    AIMessagePromptTemplate,
-    HumanMessagePromptTemplate,
-)
-from langchain.schema import (
-    AIMessage,
-    HumanMessage,
-    SystemMessage
-)
+from streamlit_chat import message
+import openai
+
+st.set_page_config(page_title="Chat with WardleyGPT")
+st.title("Chat with WardleyGPT")
+st.sidebar.markdown("Developed by Mark Craddock](https://twitter.com/mcraddock)", unsafe_allow_html=True)
+st.sidebar.markdown("Current Version: 0.1.4")
+st.sidebar.markdown("Using GPT-4 API")
+st.sidebar.markdown("Not optimised")
+st.sidebar.markdown("May run out of OpenAI credits")
 
 API_ENDPOINT = "https://api.onlinewardleymaps.com/v1/maps/fetch?id="
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 model = "gpt-4"
 
-template = """
-Your goal is to provide assistance on wardley maps and always give a verbose answer.
-The input format for the provided Wardley Map a text description. The chatbot can be designed to handle any of these formats.
-The main features or functionalities the chatbot should have can include explaining the different components and activities of the map, identifying patterns or potential improvements, offering insights and recommendations, and answering questions related to the map. For example, the chatbot can help users identify components that are in the commodity stage and suggest ways to reduce costs or improve efficiency. The chatbot can also help users identify components that are in the genesis stage and suggest ways to innovate and differentiate from competitors.
-To help users understand the analysis better, the chatbot can provide examples or case studies. For example, the chatbot can show how other companies have used Wardley Maps to make strategic decisions or improve their systems. The chatbot can also provide tips and best practices for creating and analyzing Wardley Maps.
-WARDLEY MAP: {map}
-QUESTION: {question}
-YOUR RESPONSE:
-"""
-def load_LLM(openai_api_key):
-    """Logic for loading the chain you want to use should go here."""
-    llm = OpenAI(temperature=0.7, openai_api_key=OPENAI_API_KEY, max_tokens=500)
-    return llm
+def get_initial_message():
+    messages=[
+            {"role": "system", "content": """
+             As a chatbot, analyze the provided Wardley Map and offer insights and recommendations based on its components.
+             Suggestions:
+             Request the Wardley Map for analysis
+             Explain the analysis process for a Wardley Map
+             Discuss the key insights derived from the map
+             Provide recommendations based on the analysis
+             Offer guidance for potential improvements or adjustments to the map
+             WARDLEY MAP: {map}
+             QUESTION: {question}
+             YOUR RESPONSE:
+             Provide your answers using Wardley Mapping in a form of a sarcastic tweet.
+             """},
+            {"role": "user", "content": ""},
+            {"role": "assistant", "content": ""}
+        ]
+    return messages
 
-# Define the Streamlit app
-def app():
+def get_chatgpt_response(messages, model=model):
+    print("model: ", model)
+    response = openai.ChatCompletion.create(
+    model=model,
+    messages=messages
+    )
+    return response['choices'][0]['message']['content']
 
-    # Set the page title and layout
-    st.set_page_config(page_title="Chat with your map")
-    st.title("Chat with your map")
-    st.sidebar.markdown("# Chat with your Wardley Map")
-    st.sidebar.markdown("Developed by Mark Craddock](https://twitter.com/mcraddock)", unsafe_allow_html=True)
-    st.sidebar.markdown("Current Version: 0.1.4")
-        
-    # Define the form to enter the map ID
-    map_id = st.text_input("Enter the ID of the Wardley Map: For example https://onlinewardleymaps.com/#clone:OXeRWhqHSLDXfOnrfI, enter: OXeRWhqHSLDXfOnrfI", value="OXeRWhqHSLDXfOnrfI")
-    question = st.text_input(label="Question ", value="Create a numbered list of the components in this wardley map.", key="q_input", max_chars=150)
-    if len(question.split(" ")) > 700:
-        st.write("Please enter a shorter question about your Wardley Map")
-        st.stop()
+def update_chat(messages, role, content):
+    messages.append({"role": role, "content": content})
+    return messages
 
-    # Load the map data when the user submits the form
-    if st.button("Ask Question to Wardley AI"):
-        # Fetch the map data from the API
-        url = f"https://api.onlinewardleymaps.com/v1/maps/fetch?id={map_id}"
-        response = requests.get(url)
+if 'generated' not in st.session_state:
+    st.session_state['generated'] = []
+    
+if 'past' not in st.session_state:
+    st.session_state['past'] = []
 
-        # Check if the map was found
-        if response.status_code == 200:
-            map_data = response.json()
-            
-            prompt = PromptTemplate(
-                input_variables=["map", "question"],
-                template=template,
-            )
-                                    
-            llm = load_LLM(OPENAI_API_KEY)
-            
-            prompt_wardley_ai = prompt.format(question=question, map=map_data)
-            response = llm(prompt_wardley_ai)
-            
-            st.markdown("### Response:")
-            st.write(response)
-                   
-        else:
-            st.error("Map not found. Please enter a valid ID.")
-                                                                                                                          
-if __name__ == "__main__":
-    app()
+query = st.text_input("Question: ", "What questions can I ask about this Wardley Map?", key="input")
+
+if 'messages' not in st.session_state:
+    st.session_state['messages'] = get_initial_message()
+
+if query:
+    with st.spinner("generating..."):
+        messages = st.session_state['messages']
+        messages = update_chat(messages, "user", query)
+        response = get_chatgpt_response(messages, model)
+        messages = update_chat(messages, "assistant", response)
+        st.session_state.past.append(query)
+        st.session_state.generated.append(response)
+
+if st.session_state['generated']:
+
+    for i in range(len(st.session_state['generated'])-1, -1, -1):
+        message(st.session_state["generated"][i], key=str(i))
+        message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
