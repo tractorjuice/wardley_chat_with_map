@@ -96,7 +96,7 @@ if st.session_state.get('current_map_id') != map_id:
     query = "Suggest some questions you can answer about this Wardley Map?"
     st.session_state['messages'] = get_initial_message()
 
-if 'map_text' st.session_state:
+if 'map_text' in st.session_state:
     st.sidebar.write(st.session_state['map_text']
     
 if query:
