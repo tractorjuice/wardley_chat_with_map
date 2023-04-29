@@ -20,36 +20,10 @@ OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 model = "gpt-4"
 
 template = """
-Your goal is to provide assistance on wardley maps and always give a verbose answer. The following explains how the wardley map is formatted:
-Thank you for providing the detailed explanation of the Wardley Map formatting. Here is a summary of the elements in the format:
-Title: The title of the Wardley Map.
-Components: Name of the component. Component Name [Visibility, Maturity].
-Market: Create a market with market Name [Visibility, Maturity].
-Inertia: Indicate resistance to change with inertia.
-Evolve: Evolution of a component. volve Name (X Axis).
-Links: Link components with Start Component->End Component.
-Flow: Indicate flow. Component->>Component.
-Pipeline: Set a component as a pipeline with pipeline Component Name [X Axis (start), X Axis (end)].
-Pioneers, Settlers, Townplanners area: Add areas to indicate the working approach with pioneers, settlers, and townplanners.
-Build, buy, outsource: Indicate the method of execution with build, buy, or outsource.
-Submap: Link a submap to a component with submap Component [visibility, maturity] url(urlName) and url urlName [URL].
-Stages of Evolution: Customize the stages of evolution labels with evolution.
-Y-Axis Labels: The visibility of the component
-Notes: Notes about this Wardley Map.
-Styles: The style of the Wardley Map.
-This formatting makes it easy to create and modify Wardley Maps, and it's helpful for understanding the structure and connections between components.
-X-axis: Evolution (from left to right)
-Genesis (0.0 to 0.2): Novel, unique, and unproven components
-Custom Built (0.21 to 0.4): Developed specifically for a particular use case or organization, less mature, and standardized
-Product (0.41 to 0.7): More widely available, standardized, and mature components with multiple implementations or versions in the market
-Commodity (0.71 to 1.0): Highly standardized, widely available, often provided as a utility or service, very mature, and little differentiation between offerings
-Y-axis: Visibility (from bottom to top)
-At the left side of the map (0.0), components are less visible to the user, meaning that they are more internal, hidden, or not directly related to user interactions.
-At the right side of the map (1.0), components are more visible to the user, meaning that they are directly related to user interactions or are essential components that the user experiences.
+Your goal is to provide assistance on wardley maps and always give a verbose answer.
 WARDLEY MAP: {map}
 QUESTION: {question}
-    
-    YOUR RESPONSE:
+YOUR RESPONSE:
 """
 def load_LLM(openai_api_key):
     """Logic for loading the chain you want to use should go here."""
