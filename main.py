@@ -12,12 +12,6 @@ st.sidebar.markdown("### Wardley Map ID")
 st.sidebar.markdown("")
 map_id = st.sidebar.text_input("Enter the ID of the Wardley Map: For example https://onlinewardleymaps.com/#clone:OXeRWhqHSLDXfOnrfI, enter: OXeRWhqHSLDXfOnrfI", value="OXeRWhqHSLDXfOnrfI")
 
-# Display the map data in the sidebar
-st.sidebar.markdown("### Map Data")
-if map_data:
-    st.sidebar.code(map_data)
-
-
 st.sidebar.markdown("Developed by Mark Craddock](https://twitter.com/mcraddock)", unsafe_allow_html=True)
 st.sidebar.markdown("Current Version: 0.1.4")
 st.sidebar.markdown("Using GPT-4 API")
@@ -31,6 +25,11 @@ def get_initial_message():
     response = requests.get(url)
     map_data = response.json()
     map_text = map_data["text"]
+    
+    # Display the map data in the sidebar
+    st.sidebar.markdown("### Map Data")
+    if map_text:
+        st.sidebar.code(map_text)
     
     messages = [
         {
