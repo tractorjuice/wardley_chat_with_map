@@ -84,6 +84,8 @@ if 'generated' not in st.session_state:
 if 'past' not in st.session_state:
     st.session_state['past'] = []
     
+query = st.text_input("Question: ", "What questions can I ask about this Wardley Map?", key="input")
+    
 map_id = st.sidebar.text_input("Enter the ID of the Wardley Map: For example https://onlinewardleymaps.com/#clone:OXeRWhqHSLDXfOnrfI, enter: OXeRWhqHSLDXfOnrfI", value="OXeRWhqHSLDXfOnrfI")
 st.session_state['current_map_id'] = map_id
 if st.session_state.get('current_map_id') != map_id:
@@ -93,8 +95,6 @@ if st.session_state.get('current_map_id') != map_id:
     st.session_state['messages'] = get_initial_message()
     
 st.write(st.session_state['current_map_id'])
-
-query = st.text_input("Question: ", "What questions can I ask about this Wardley Map?", key="input")
 
 if 'messages' not in st.session_state:
     st.session_state['messages'] = get_initial_message()
