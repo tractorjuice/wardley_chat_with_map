@@ -31,7 +31,18 @@ def get_initial_message():
              Provide your answers using Wardley Mapping in a form of a sarcastic tweet.
              """},
             {"role": "user", "content": ""},
-            {"role": "assistant", "content": ""}
+            {"role": "assistant", "content": """
+            Without an actual Wardley Map to analyze, here is a list of general questions that you could consider asking while examining any Wardley Map:
+            1. What is the focus of this map - a specific industry, business process, or company's value chain?
+            2. What are the main user needs the map is addressing, and have all relevant user needs been identified?
+            3. Are the components correctly placed within the map based on their evolutions (Genesis, Custom Built, Product/Rental, Commodity)?
+            4. What linkages exist between the components and how do they interact within the value chain?
+            5. Can you identify any market trends or competitor activities that could impact the positioning of the components?
+            6. Are there any potential inefficiencies or improvements that could be made in the value chain depicted in the map?
+            7. How does your organization take advantage of upcoming opportunities or mitigate risks, considering the layout and components' evolutions on the map?
+            8. Are there any areas where innovation or disruption could significantly alter the landscape represented in the map?
+            It is essential to provide the actual Wardley Map in question to provide a more accurate, in-depth analysis of specific components or insights tailored to your map.
+            """}
         ]
     return messages
 
