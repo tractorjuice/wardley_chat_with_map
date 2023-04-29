@@ -25,10 +25,7 @@ def get_initial_message():
     response = requests.get(url)
     map_data = response.json()
     map_text = map_data["text"]
-    
-    # Display the map data in the sidebar
-    if map_text:
-        st.sidebar.write(map_text)
+    st.session_state['map_text'] = map_text
     
     messages = [
         {
@@ -67,7 +64,6 @@ def get_initial_message():
     ]
     return messages
 
-
 def get_chatgpt_response(messages, model=model):
     response = openai.ChatCompletion.create(
     model=model,
@@ -87,6 +83,9 @@ if 'past' not in st.session_state:
 
 if 'messages' not in st.session_state:
     st.session_state['messages'] = []
+    
+if 'map_text' not in st.session_state:
+    st.session_state['map_text'] = []
     
 query = st.text_input("Question: ", key="input")
     
