@@ -17,6 +17,7 @@ st.sidebar.markdown("")
 st.sidebar.markdown("Developed by Mark Craddock](https://twitter.com/mcraddock)", unsafe_allow_html=True)
 st.sidebar.markdown("Current Version: 0.1.4")
 st.sidebar.markdown("Using GPT-4 API")
+st.sidebar.markdown("### Map Data")
 
 def get_initial_message():
     query = "Suggest some questions you can answer about this Wardley Map?"
@@ -26,7 +27,6 @@ def get_initial_message():
     map_text = map_data["text"]
     
     # Display the map data in the sidebar
-    st.sidebar.markdown("### Map Data")
     if map_text:
         st.sidebar.write(map_text)
     
@@ -97,6 +97,9 @@ if st.session_state.get('current_map_id') != map_id:
     query = "Suggest some questions you can answer about this Wardley Map?"
     st.session_state['messages'] = get_initial_message()
 
+if map_text:
+    st.sidebar.write(map_text)
+    
 if query:
     with st.spinner("generating..."):
         
