@@ -21,6 +21,9 @@ model = "gpt-4"
 
 template = """
 Your goal is to provide assistance on wardley maps and always give a verbose answer.
+The input format for the provided Wardley Map a text description. The chatbot can be designed to handle any of these formats.
+The main features or functionalities the chatbot should have can include explaining the different components and activities of the map, identifying patterns or potential improvements, offering insights and recommendations, and answering questions related to the map. For example, the chatbot can help users identify components that are in the commodity stage and suggest ways to reduce costs or improve efficiency. The chatbot can also help users identify components that are in the genesis stage and suggest ways to innovate and differentiate from competitors.
+To help users understand the analysis better, the chatbot can provide examples or case studies. For example, the chatbot can show how other companies have used Wardley Maps to make strategic decisions or improve their systems. The chatbot can also provide tips and best practices for creating and analyzing Wardley Maps.
 WARDLEY MAP: {map}
 QUESTION: {question}
 YOUR RESPONSE:
