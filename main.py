@@ -85,7 +85,7 @@ if 'past' not in st.session_state:
     st.session_state['past'] = []
 
 if 'messages' not in st.session_state:
-    st.session_state['past'] = []
+    st.session_state['messages'] = []
     
 query = st.text_input("Question: ", "What questions can I ask about this Wardley Map?", key="input")
     
