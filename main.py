@@ -62,9 +62,9 @@ def app():
     # Set the page title and layout
     st.set_page_config(page_title="Chat with your map")
     st.title("Chat with your map")
-    st.sidebar.markdown("# Ask Questions about Your Map")
+    st.sidebar.markdown("# Chat with your Wardley Map")
     st.sidebar.markdown("Developed by Mark Craddock](https://twitter.com/mcraddock)", unsafe_allow_html=True)
-    st.sidebar.markdown("Current Version: 0.0.2")
+    st.sidebar.markdown("Current Version: 0.1.4")
         
     # Define the form to enter the map ID
     map_id = st.text_input("Enter the ID of the Wardley Map: For example https://onlinewardleymaps.com/#clone:OXeRWhqHSLDXfOnrfI, enter: OXeRWhqHSLDXfOnrfI", value="OXeRWhqHSLDXfOnrfI")
