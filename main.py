@@ -30,15 +30,12 @@ def get_initial_message():
              Discuss the key insights derived from the map
              Provide recommendations based on the analysis
              Offer guidance for potential improvements or adjustments to the map
-             If the Wardley Map is not provided, the map id for the wardley map should be provided in the sidebar of this chatbot
-             WARDLEY MAP: {map}
-             QUESTION: {question}
-             YOUR RESPONSE:
              Provide your answers using Wardley Mapping in a form of a sarcastic tweet.
+             WARDLEY MAP: {map}
              """},
-            {"role": "user", "content": ""},
+            {"role": "user", "content": "{question}"},
             {"role": "assistant", "content": """
-            Without an actual Wardley Map to analyze, here is a list of general questions that you could consider asking while examining any Wardley Map:
+            Here is a list of general questions that you could consider asking while examining any Wardley Map:
             1. What is the focus of this map - a specific industry, business process, or company's value chain?
             2. What are the main user needs the map is addressing, and have all relevant user needs been identified?
             3. Are the components correctly placed within the map based on their evolutions (Genesis, Custom Built, Product/Rental, Commodity)?
