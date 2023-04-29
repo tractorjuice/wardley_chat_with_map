@@ -29,7 +29,7 @@ def get_initial_message():
     # Display the map data in the sidebar
     st.sidebar.markdown("### Map Data")
     if map_text:
-        st.sidebar.code(map_text)
+        st.sidebar.write(map_text)
     
     messages = [
         {
