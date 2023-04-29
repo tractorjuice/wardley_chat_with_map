@@ -26,7 +26,7 @@ def get_initial_message():
              Discuss the key insights derived from the map
              Provide recommendations based on the analysis
              Offer guidance for potential improvements or adjustments to the map
-             The map id for the wardley map is provided in the sidebar of this chatbot
+             If the Wardley Map is not provided, the map id for the wardley map should be provided in the sidebar of this chatbot
              WARDLEY MAP: {map}
              QUESTION: {question}
              YOUR RESPONSE:
