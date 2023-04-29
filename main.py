@@ -88,11 +88,19 @@ if 'generated' not in st.session_state:
 if 'past' not in st.session_state:
     st.session_state['past'] = []
     
-if st.session_state.get('current_map_id') != map_id:
-    st.session_state['messages'] = []
-    #st.session_state['current_map_id'] = map_id
+#if st.session_state.get('current_map_id') != map_id:
+#    st.session_state['messages'] = []
+#    #st.session_state['current_map_id'] = map_id
+#    query = "What questions can I ask about this Wardley Map?"
 
 query = st.text_input("Question: ", "What questions can I ask about this Wardley Map?", key="input")
+
+if st.sidebar.button("Update Map"):
+    st.session_state['generated'] = []
+    st.session_state['messages'] = []
+    #st.session_state['current_map_id'] = map_id
+    query = "What questions can I ask about this Wardley Map?"
+
 
 if 'messages' not in st.session_state:
     st.session_state['messages'] = get_initial_message()
