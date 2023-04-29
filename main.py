@@ -83,6 +83,9 @@ if 'generated' not in st.session_state:
     
 if 'past' not in st.session_state:
     st.session_state['past'] = []
+
+if 'messages' not in st.session_state:
+    st.session_state['past'] = []
     
 query = st.text_input("Question: ", "What questions can I ask about this Wardley Map?", key="input")
     
@@ -95,8 +98,8 @@ if st.session_state.get('current_map_id') != map_id:
     
 st.write(st.session_state['current_map_id'])
 
-if 'messages' not in st.session_state:
-    st.session_state['messages'] = get_initial_message()
+#if 'messages' not in st.session_state:
+#    st.session_state['messages'] = get_initial_message()
 
 if query:
     with st.spinner("generating..."):
