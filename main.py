@@ -8,12 +8,13 @@ API_ENDPOINT = "https://api.onlinewardleymaps.com/v1/maps/fetch?id="
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 model = "gpt-4"
 
-st.set_page_config(page_title="Chat with WardleyGPT")
-st.title("Chat with WardleyGPT")
+st.set_page_config(page_title="Chat with your Wardley Map")
+st.sidebar.title("Chat with Map")
 
 # Define the form to enter the map ID
 st.sidebar.markdown("### Wardley Map ID")
 st.sidebar.markdown("")
+
 map_id = st.sidebar.text_input("Enter the ID of the Wardley Map: For example https://onlinewardleymaps.com/#clone:OXeRWhqHSLDXfOnrfI, enter: OXeRWhqHSLDXfOnrfI", value="OXeRWhqHSLDXfOnrfI")
 st.session_state['current_map_id'] = map_id
 
