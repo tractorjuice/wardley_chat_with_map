@@ -14,10 +14,6 @@ st.sidebar.title("Chat with Map")
 # Define the form to enter the map ID
 st.sidebar.markdown("### Wardley Map ID")
 st.sidebar.markdown("")
-
-map_id = st.sidebar.text_input("Enter the ID of the Wardley Map: For example https://onlinewardleymaps.com/#clone:OXeRWhqHSLDXfOnrfI, enter: OXeRWhqHSLDXfOnrfI", value="OXeRWhqHSLDXfOnrfI")
-st.session_state['current_map_id'] = map_id
-
 st.sidebar.markdown("Developed by Mark Craddock](https://twitter.com/mcraddock)", unsafe_allow_html=True)
 st.sidebar.markdown("Current Version: 0.1.4")
 st.sidebar.markdown("Using GPT-4 API")
@@ -88,19 +84,14 @@ if 'generated' not in st.session_state:
 if 'past' not in st.session_state:
     st.session_state['past'] = []
     
-#if st.session_state.get('current_map_id') != map_id:
-#    st.session_state['messages'] = []
-#    #st.session_state['current_map_id'] = map_id
-#    query = "What questions can I ask about this Wardley Map?"
-
-query = st.text_input("Question: ", "What questions can I ask about this Wardley Map?", key="input")
-
-if st.sidebar.button("Update Map"):
-    st.session_state['generated'] = []
-    st.session_state['messages'] = []
-    #st.session_state['current_map_id'] = map_id
+map_id = st.sidebar.text_input("Enter the ID of the Wardley Map: For example https://onlinewardleymaps.com/#clone:OXeRWhqHSLDXfOnrfI, enter: OXeRWhqHSLDXfOnrfI", value="OXeRWhqHSLDXfOnrfI")
+st.session_state['current_map_id'] = map_id
+if st.session_state.get('current_map_id') != map_id:
+    del st.session_state['messages']
+    st.session_state['current_map_id'] = map_id
     query = "What questions can I ask about this Wardley Map?"
 
+query = st.text_input("Question: ", "What questions can I ask about this Wardley Map?", key="input")
 
 if 'messages' not in st.session_state:
     st.session_state['messages'] = get_initial_message()
