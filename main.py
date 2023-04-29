@@ -114,11 +114,7 @@ if 'map_text' in st.session_state:
 
 if query:
     with st.spinner("generating..."):
-        
-        url = f"https://api.onlinewardleymaps.com/v1/maps/fetch?id={map_id}"
-        response = requests.get(url)
-        map_data = response.json()
-        
+        #map_data = st.session_state['map_text']
         messages = st.session_state['messages']
         messages = update_chat(messages, "user", query)
         response = get_chatgpt_response(messages, model)
