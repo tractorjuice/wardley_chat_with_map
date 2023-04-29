@@ -12,12 +12,11 @@ st.set_page_config(page_title="Chat with your Wardley Map")
 st.sidebar.title("Chat with Map")
 
 # Define the form to enter the map ID
-st.sidebar.markdown("### Wardley Map ID")
 st.sidebar.markdown("")
 st.sidebar.markdown("Developed by Mark Craddock](https://twitter.com/mcraddock)", unsafe_allow_html=True)
 st.sidebar.markdown("Current Version: 0.1.4")
 st.sidebar.markdown("Using GPT-4 API")
-st.sidebar.markdown("### Map Data")
+st.sidebar.markdown("## Enter Map ID")
 
 def get_initial_message():
     query = "Suggest some questions you can answer about this Wardley Map?"
@@ -99,6 +98,7 @@ if st.session_state.get('current_map_id') != map_id:
     st.session_state['messages'] = get_initial_message()
 
 if 'map_text' in st.session_state:
+    st.sidebar.markdown("### Downloaded Map Data")
     st.sidebar.write(st.session_state['map_text'])
     
 if query:
