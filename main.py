@@ -100,14 +100,14 @@ if st.session_state.get('current_map_id') != map_id:
 title = ""
 
 if 'map_text' in st.session_state:
-    st.sidebar.markdown("### Downloaded Map Data")
-    st.sidebar.write(st.session_state['map_text'])
     map_text = st.session_state['map_text']
     for line in map_text.split("\n"):
         if line.startswith("title"):
             title = line.split("title ")[1]
     if title:
-        st.sidebar.markdown(f"### Map Title: {title}")
+        st.sidebar.markdown(f"### {title}")
+    st.sidebar.markdown("### Downloaded Map Data")
+    st.sidebar.write(st.session_state['map_text'])
     
     
 if query:
