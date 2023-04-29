@@ -125,6 +125,7 @@ if query:
         messages = update_chat(messages, "assistant", response)
         st.session_state.past.append(query)
         st.session_state.generated.append(response)
+        st.session_state["input"] = ""
 
 if st.session_state['generated']:
 
