@@ -17,9 +17,6 @@ st.sidebar.markdown("Developed by Mark Craddock](https://twitter.com/mcraddock)"
 st.sidebar.markdown("Current Version: 0.1.4")
 st.sidebar.markdown("Using GPT-4 API")
 st.sidebar.markdown("## Enter Map ID")
-
-def clear_text():
-    st.session_state["input"] = ""
     
 def get_initial_message():
     query = "Suggest some questions you can answer about this Wardley Map?"
@@ -89,7 +86,7 @@ if 'messages' not in st.session_state:
 if 'map_text' not in st.session_state:
     st.session_state['map_text'] = []
     
-query = st.text_input("Question: ", value="", key="input", on_change=clear_text())
+query = st.text_input("Question: ", value="", key="input")
     
 map_id = st.sidebar.text_input("Enter the ID of the Wardley Map:", value="7OPuuDEWFoyfj00TS1")
 st.sidebar.write("For https://onlinewardleymaps.com/#clone:OXeRWhqHSLDXfOnrfI")
@@ -128,7 +125,7 @@ if query:
         messages = update_chat(messages, "assistant", response)
         st.session_state.past.append(query)
         st.session_state.generated.append(response)
-        st.session_state["input"] = ""
+        del st.session_state["input"]
 
 if st.session_state['generated']:
 
