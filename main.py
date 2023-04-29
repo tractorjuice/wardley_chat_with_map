@@ -65,7 +65,9 @@ if 'past' not in st.session_state:
     st.session_state['past'] = []
 
 # Define the form to enter the map ID
-map_id = st.text_input("Enter the ID of the Wardley Map: For example https://onlinewardleymaps.com/#clone:OXeRWhqHSLDXfOnrfI, enter: OXeRWhqHSLDXfOnrfI", value="OXeRWhqHSLDXfOnrfI")
+if not map_id:
+    map_id = st.text_input("Enter the ID of the Wardley Map: For example https://onlinewardleymaps.com/#clone:OXeRWhqHSLDXfOnrfI, enter: OXeRWhqHSLDXfOnrfI", value="OXeRWhqHSLDXfOnrfI")
+
 query = st.text_input("Question: ", "What questions can I ask about this Wardley Map?", key="input")
 
 if 'messages' not in st.session_state:
