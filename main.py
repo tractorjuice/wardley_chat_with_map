@@ -18,6 +18,9 @@ st.sidebar.markdown("Current Version: 0.1.4")
 st.sidebar.markdown("Using GPT-4 API")
 st.sidebar.markdown("## Enter Map ID")
 
+def clear_text():
+    st.session_state["input"] = ""
+    
 def get_initial_message():
     query = "Suggest some questions you can answer about this Wardley Map?"
     url = f"https://api.onlinewardleymaps.com/v1/maps/fetch?id={map_id}"
@@ -86,7 +89,7 @@ if 'messages' not in st.session_state:
 if 'map_text' not in st.session_state:
     st.session_state['map_text'] = []
     
-query = st.text_input("Question: ", value="", key="input")
+query = st.text_input("Question: ", value="", key="input", on_change=clear_text())
     
 map_id = st.sidebar.text_input("Enter the ID of the Wardley Map:", value="7OPuuDEWFoyfj00TS1")
 st.sidebar.write("For https://onlinewardleymaps.com/#clone:OXeRWhqHSLDXfOnrfI")
