@@ -15,6 +15,7 @@ st.title("Chat with WardleyGPT")
 st.sidebar.markdown("### Wardley Map ID")
 st.sidebar.markdown("")
 map_id = st.sidebar.text_input("Enter the ID of the Wardley Map: For example https://onlinewardleymaps.com/#clone:OXeRWhqHSLDXfOnrfI, enter: OXeRWhqHSLDXfOnrfI", value="OXeRWhqHSLDXfOnrfI")
+st.session_state['current_map_id'] = map_id
 
 st.sidebar.markdown("Developed by Mark Craddock](https://twitter.com/mcraddock)", unsafe_allow_html=True)
 st.sidebar.markdown("Current Version: 0.1.4")
@@ -88,7 +89,7 @@ if 'past' not in st.session_state:
     
 if st.session_state.get('current_map_id') != map_id:
     st.session_state['messages'] = []
-    st.session_state['current_map_id'] = map_id
+    #st.session_state['current_map_id'] = map_id
 
 query = st.text_input("Question: ", "What questions can I ask about this Wardley Map?", key="input")
 
