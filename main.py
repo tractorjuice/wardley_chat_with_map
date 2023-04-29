@@ -17,6 +17,7 @@ from langchain.schema import (
 
 API_ENDPOINT = "https://api.onlinewardleymaps.com/v1/maps/fetch?id="
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
+model = "gpt-4"
 
 template = """
 Your goal is to provide assistance on wardley maps and always give a verbose answer. The following explains how the wardley map is formatted:
@@ -52,7 +53,7 @@ QUESTION: {question}
 """
 def load_LLM(openai_api_key):
     """Logic for loading the chain you want to use should go here."""
-    llm = OpenAI(temperature=0.7, openai_api_key=OPENAI_API_KEY, max_tokens=500)
+    llm = OpenAI(temperature=0.7, model =model, openai_api_key=OPENAI_API_KEY, max_tokens=500)
     return llm
 
 # Define the Streamlit app
