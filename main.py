@@ -86,7 +86,7 @@ if 'messages' not in st.session_state:
 if 'map_text' not in st.session_state:
     st.session_state['map_text'] = []
     
-query = st.text_input("Question: ", key="input")
+query = st.text_input("Question: ", value="", key="input")
     
 map_id = st.sidebar.text_input("Enter the ID of the Wardley Map:", value="7OPuuDEWFoyfj00TS1")
 st.sidebar.write("For https://onlinewardleymaps.com/#clone:OXeRWhqHSLDXfOnrfI")
