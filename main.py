@@ -96,10 +96,18 @@ if st.session_state.get('current_map_id') != map_id:
     st.session_state['current_map_id'] = map_id
     query = "Suggest some questions you can answer about this Wardley Map?"
     st.session_state['messages'] = get_initial_message()
+    
+title = ""
 
 if 'map_text' in st.session_state:
     st.sidebar.markdown("### Downloaded Map Data")
     st.sidebar.write(st.session_state['map_text'])
+    for line in map_text.split("\n"):
+        if line.startswith("title"):
+            title = line.split("title ")[1]
+    if title:
+        st.sidebar.markdown(f"### Map Title: {title}")
+    
     
 if query:
     with st.spinner("generating..."):
