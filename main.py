@@ -90,6 +90,9 @@ if st.session_state.get('current_map_id') != map_id:
     del st.session_state['messages']
     st.session_state['current_map_id'] = map_id
     query = "What questions can I ask about this Wardley Map?"
+    st.session_state['messages'] = get_initial_message()
+    
+st.write(st.session_state['current_map_id'])
 
 query = st.text_input("Question: ", "What questions can I ask about this Wardley Map?", key="input")
 
