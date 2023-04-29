@@ -4,6 +4,10 @@ import requests
 from streamlit_chat import message
 import openai
 
+API_ENDPOINT = "https://api.onlinewardleymaps.com/v1/maps/fetch?id="
+OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
+model = "gpt-4"
+
 st.set_page_config(page_title="Chat with WardleyGPT")
 st.title("Chat with WardleyGPT")
 
@@ -15,10 +19,6 @@ map_id = st.sidebar.text_input("Enter the ID of the Wardley Map: For example htt
 st.sidebar.markdown("Developed by Mark Craddock](https://twitter.com/mcraddock)", unsafe_allow_html=True)
 st.sidebar.markdown("Current Version: 0.1.4")
 st.sidebar.markdown("Using GPT-4 API")
-
-API_ENDPOINT = "https://api.onlinewardleymaps.com/v1/maps/fetch?id="
-OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
-model = "gpt-4"
 
 def get_initial_message():
     url = f"https://api.onlinewardleymaps.com/v1/maps/fetch?id={map_id}"
@@ -85,6 +85,10 @@ if 'generated' not in st.session_state:
     
 if 'past' not in st.session_state:
     st.session_state['past'] = []
+    
+if st.session_state.get('current_map_id') != map_id:
+    st.session_state['generated'] = []
+    st.session_state['current_map_id'] = map_id
 
 query = st.text_input("Question: ", "What questions can I ask about this Wardley Map?", key="input")
 
