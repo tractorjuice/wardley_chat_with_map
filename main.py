@@ -88,7 +88,10 @@ if 'map_text' not in st.session_state:
     
 query = st.text_input("Question: ", key="input")
     
-map_id = st.sidebar.text_input("Enter the ID of the Wardley Map: For example https://onlinewardleymaps.com/#clone:OXeRWhqHSLDXfOnrfI, enter: OXeRWhqHSLDXfOnrfI", value="7OPuuDEWFoyfj00TS1")
+map_id = st.sidebar.text_input("Enter the ID of the Wardley Map:"), value="7OPuuDEWFoyfj00TS1")
+st.sidebar.write("For https://onlinewardleymaps.com/#clone:OXeRWhqHSLDXfOnrfI")
+st.sidebar.write("Enter: OXeRWhqHSLDXfOnrfI")
+    
 if st.session_state.get('current_map_id') != map_id:
     del st.session_state['messages']
     st.session_state['past'] = []
