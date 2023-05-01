@@ -127,8 +127,7 @@ if query:
         messages = update_chat(messages, "assistant", response)
         st.session_state.past.append(query)
         st.session_state.generated.append(response)
-        #del st.session_state["input"]
-        st.session_state["input"] = st.empty()
+        del st.session_state["input"]
 
 if st.session_state['generated']:
 
