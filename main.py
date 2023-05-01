@@ -95,7 +95,7 @@ query = st.text_input("Question: ", value="", key="input")
     
 map_id = st.sidebar.text_input("Enter the ID of the Wardley Map:", value="7OPuuDEWFoyfj00TS1")
 st.sidebar.write("For https://onlinewardleymaps.com/#clone:OXeRWhqHSLDXfOnrfI")
-st.sidebar.write("Examples:\n\ngQuu7Kby3yYveDngy2\n\nMOSCNj9iXnXdbCutbl\n\nOXeRWhqHSLDXfOnrfI")
+st.sidebar.write("Examples:\ngQuu7Kby3yYveDngy2\nxi4JEUqte7XRWjjhgQ\nMOSCNj9iXnXdbCutbl\nOXeRWhqHSLDXfOnrfI")
 st.sidebar.markdown(html_temp.format("rgba(55, 53, 47, 0.16)"),unsafe_allow_html=True)
     
 if st.session_state.get('current_map_id') != map_id:
