@@ -128,7 +128,7 @@ if query:
         st.session_state.past.append(query)
         st.session_state.generated.append(response)
         #del st.session_state["input"]
-        input.empty()
+        st.session_state["input"] = st.empty()
 
 if st.session_state['generated']:
 
