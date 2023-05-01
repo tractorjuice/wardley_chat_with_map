@@ -119,7 +119,7 @@ if 'map_text' in st.session_state:
     st.sidebar.write(st.session_state['map_text'])
 
 if query:
-    with st.spinner("generating..."):
+    with st.spinner("thinking... this can take a while..."):
         #map_data = st.session_state['map_text']
         messages = st.session_state['messages']
         messages = update_chat(messages, "user", query)
