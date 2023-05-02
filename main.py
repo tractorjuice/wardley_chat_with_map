@@ -35,17 +35,14 @@ def get_initial_message():
         {
             "role": "system",
             "content": f"""
-             As a chatbot, analyze the provided Wardley Map and offer insights and recommendations based on its components with the following components and relationships,based on its structure:
-             Components: Y (evolution), X (visiblity)
-             Relationships: C -> I, D -> E, G -> K
-             
+             As a chatbot, analyze the provided Wardley Map and offer insights and recommendations based on its components.
+
              Suggestions:
              Request the Wardley Map for analysis
              Explain the analysis process for a Wardley Map
              Discuss the key insights derived from the map
              Provide recommendations based on the analysis
              Offer guidance for potential improvements or adjustments to the map
-             Provide your answers using Wardley Mapping in a form of a sarcastic tweet.
              WARDLEY MAP: {map_text}
              """
         },
