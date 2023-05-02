@@ -116,7 +116,7 @@ if 'map_text' in st.session_state:
             title = line.split("title ")[1]
     if title:
         st.sidebar.markdown(f"### {title}")
-    st.code(st.session_state['map_text'])
+    st.sidebar.code(st.session_state['map_text'])
 
 if query:
     with st.spinner("thinking... this can take a while..."):
