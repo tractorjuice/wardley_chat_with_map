@@ -186,7 +186,12 @@ def get_initial_message():
     response = requests.get(url)
     map_data = response.json()
     map_text = map_data["text"]
-    st.session_state['map_text'] = map_text
+    
+    # Parse the Wardley map text
+    parsed_map = parse_wardley_map(map_text)
+   
+    #st.session_state['map_text'] = map_text
+    st.session_state['map_text'] = parsed_map
     
     messages = [
         {
