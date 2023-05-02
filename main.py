@@ -190,8 +190,8 @@ def get_initial_message():
     # Parse the Wardley map text
     parsed_map = parse_wardley_map(map_text)
    
-    #st.session_state['map_text'] = map_text
-    st.session_state['map_text'] = parsed_map
+    st.session_state['map_text'] = map_text
+    #st.session_state['map_text'] = parsed_map
     
     messages = [
         {
