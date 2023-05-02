@@ -42,7 +42,6 @@ def get_initial_message():
              Explain the analysis process for a Wardley Map
              Discuss the key insights derived from the map
              Provide recommendations based on the analysis
-             Provide information about the connections between components and user needs, using the [y,x] format
              Offer guidance for potential improvements or adjustments to the map
              WARDLEY MAP: {map_text}
              """
