@@ -1,11 +1,8 @@
 # Have an AI Chat with your Wardley Map
 Chat with your Wardley Map. Enter the map id and the map will be downloaded from OnlineWardleyMaps.com.
-\
-\
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://wardley-book-chat.streamlit.app/)
 
 ## Setup
-Clone this repository:
+Clone this repository and use Streamlit to point to this repository.
 
 ## How to Use
 On the sidebar, enter the ID of the Wardley Map that you want to chat about.
