@@ -5,10 +5,10 @@ Chat with your Wardley Map. Enter the map id and the map will be downloaded from
 Clone this repository and use Streamlit to point to this repository.
 
 ## How to Use
-On the sidebar, enter the ID of the Wardley Map that you want to chat about.
-Enter your question in the input field labeled "Question: ".
-Press enter or click outside the input box to submit your question. The application will use GPT-4 to generate a response.
-You can ask as many questions as you like. The history of your questions and the corresponding answers will be kept in the main panel.
+- On the sidebar, enter the ID of the Wardley Map that you want to chat about.
+- Enter your question in the input field labeled "Question: ".
+- Press enter or click outside the input box to submit your question. The application will use GPT-4 to generate a response.
+- You can ask as many questions as you like. The history of your questions and the corresponding answers will be kept in the main panel.
 
 ## Features
 - Allows users to input a Wardley Map ID
