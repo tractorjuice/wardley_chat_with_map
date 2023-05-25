@@ -24,8 +24,9 @@ Clone this repository and use Streamlit to point to this repository.
 ## Dependencies
 To run this code, you need the following Python packages:
 
-- os
-- re
+- streamlit
+- streamlit-chat
+- streamlit-option-menu
 - openai
 
 ### API Keys
