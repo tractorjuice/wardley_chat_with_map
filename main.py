@@ -9,19 +9,13 @@ API_ENDPOINT = "https://api.onlinewardleymaps.com/v1/maps/fetch?id="
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 model = "gpt-4"
 
-html_temp = """
-                <div style="background-color:{};padding:1px">
-                
-                </div>
-                """
-
 st.set_page_config(page_title="Chat with your Wardley Map")
 st.sidebar.title("Chat with Map")
-st.sidebar.markdown(html_temp.format("rgba(55, 53, 47, 0.16)"),unsafe_allow_html=True)
+st.divider()
 st.sidebar.markdown("Developed by Mark Craddock](https://twitter.com/mcraddock)", unsafe_allow_html=True)
 st.sidebar.markdown("Current Version: 0.1.4")
 st.sidebar.markdown("Using GPT-4 API")
-st.sidebar.markdown(html_temp.format("rgba(55, 53, 47, 0.16)"),unsafe_allow_html=True)
+st.divider()
 st.sidebar.markdown("## Enter Map ID")
     
 def get_initial_message():
@@ -87,7 +81,7 @@ if 'past' not in st.session_state:
     st.session_state['past'] = []
 
 if 'messages' not in st.session_state:
-        st.session_state['messages'] = []
+    st.session_state['messages'] = []
     
 if 'map_text' not in st.session_state:
     st.session_state['map_text'] = []
@@ -97,7 +91,7 @@ query = st.text_input("Question: ", value="", key="input")
 map_id = st.sidebar.text_input("Enter the ID of the Wardley Map:", value="7OPuuDEWFoyfj00TS1")
 st.sidebar.write("For https://onlinewardleymaps.com/#clone:OXeRWhqHSLDXfOnrfI")
 st.sidebar.write("Examples:\n\ngQuu7Kby3yYveDngy2\n\nxi4JEUqte7XRWjjhgQ\n\nMOSCNj9iXnXdbCutbl\n\nOXeRWhqHSLDXfOnrfI\n\nO42FCNodPW3UPaP8AD")
-st.sidebar.markdown(html_temp.format("rgba(55, 53, 47, 0.16)"),unsafe_allow_html=True)
+st.divider()
     
 if st.session_state.get('current_map_id') != map_id:
     del st.session_state['messages']
@@ -121,7 +115,6 @@ if 'map_text' in st.session_state:
 
 if query:
     with st.spinner("thinking... this can take a while..."):
-        #map_data = st.session_state['map_text']
         messages = st.session_state['messages']
         messages = update_chat(messages, "user", query)
         response = get_chatgpt_response(messages, model)
