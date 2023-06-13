@@ -7,7 +7,14 @@ import requests
 
 API_ENDPOINT = "https://api.onlinewardleymaps.com/v1/maps/fetch?id="
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
-model = "gpt-4"
+#MODEL = "gpt-3"
+#MODEL = "gpt-3.5-turbo"
+#MODEL = "gpt-3.5-turbo-0613"
+#MODEL = "gpt-3.5-turbo-16k"
+#MODEL = "gpt-3.5-turbo-16k-0613"
+MODEL = "gpt-4"
+#MODEL = "gpt-4-0613"
+#MODEL = "gpt-4-32k-0613"
 
 st.set_page_config(page_title="Chat with your Wardley Map")
 st.sidebar.title("Chat with Map")
@@ -117,7 +124,7 @@ if query:
     with st.spinner("thinking... this can take a while..."):
         messages = st.session_state['messages']
         messages = update_chat(messages, "user", query)
-        response = get_chatgpt_response(messages, model)
+        response = get_chatgpt_response(messages, MODEL)
         messages = update_chat(messages, "assistant", response)
         st.session_state.past.append(query)
         st.session_state.generated.append(response)
