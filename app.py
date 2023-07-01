@@ -31,7 +31,7 @@ def get_map_data(map_id):
     map_text = map_data["text"]
     return map_text
 
-map_id = st.sidebar.text_input("Enter the ID of the Wardley Map:", value="7OPuuDEWFoyfj00TS1")
+map_id = st.sidebar.text_input("Enter the ID of the Wardley Map:", value="OXeRWhqHSLDXfOnrfI")
 st.sidebar.write("For https://onlinewardleymaps.com/#clone:OXeRWhqHSLDXfOnrfI")
 st.sidebar.write("Examples:\n\ngQuu7Kby3yYveDngy2\n\nxi4JEUqte7XRWjjhgQ\n\nMOSCNj9iXnXdbCutbl\n\nOXeRWhqHSLDXfOnrfI\n\nO42FCNodPW3UPaP8AD")
 st.sidebar.divider()
