@@ -24,23 +24,20 @@ st.sidebar.markdown("Using GPT-4 API")
 st.sidebar.divider()
 st.sidebar.markdown("## Enter Map ID")
 
-if "openai_model" not in st.session_state:
-    st.session_state["openai_model"] = MODEL
-
-if 'map_text' not in st.session_state:
-    st.session_state['map_text'] = []
-    
-def get_map_data():
+def get_map_data(map_id):
     url = f"https://api.onlinewardleymaps.com/v1/maps/fetch?id={map_id}"
     response = requests.get(url)
     map_data = response.json()
     map_text = map_data["text"]
     return map_text
-    
+
 map_id = st.sidebar.text_input("Enter the ID of the Wardley Map:", value="7OPuuDEWFoyfj00TS1")
 st.sidebar.write("For https://onlinewardleymaps.com/#clone:OXeRWhqHSLDXfOnrfI")
 st.sidebar.write("Examples:\n\ngQuu7Kby3yYveDngy2\n\nxi4JEUqte7XRWjjhgQ\n\nMOSCNj9iXnXdbCutbl\n\nOXeRWhqHSLDXfOnrfI\n\nO42FCNodPW3UPaP8AD")
 st.sidebar.divider()
+
+if 'map_text' not in st.session_state:
+    st.session_state['map_text'] = get_map_data(map_id)
     
 if st.session_state.get('current_map_id') != map_id:
     st.session_state['current_map_id'] = map_id
