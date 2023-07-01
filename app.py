@@ -49,6 +49,7 @@ if st.session_state.get('current_map_id') != map_id:
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
+    map_text = st.session_state['map_text']
     st.session_state.messages.append({
             "role": "system",
             "content": f"""
