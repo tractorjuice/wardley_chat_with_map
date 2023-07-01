@@ -25,7 +25,7 @@ st.sidebar.divider()
 st.sidebar.markdown("## Enter Map ID")
 
 def get_map_data(map_id):
-    url = f"https://api.onlinewardleymaps.com/v1/maps/fetch?id={map_id}"
+    url = f"{API_ENDPOINT}{map_id}"
     response = requests.get(url)
     map_data = response.json()
     map_text = map_data["text"]
@@ -46,7 +46,6 @@ if st.session_state.get('current_map_id') != map_id:
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
-    map_text = st.session_state['map_text']
     st.session_state.messages.append({
             "role": "system",
             "content": f"""
@@ -58,13 +57,14 @@ if "messages" not in st.session_state:
              Discuss the key insights derived from the map
              Provide recommendations based on the analysis
              Offer guidance for potential improvements or adjustments to the map
-             WARDLEY MAP: {map_text}
+             WARDLEY MAP: {st.session_state['map_text']}
              """
         })
     st.session_state.messages.append(   
         {
             "role": "user",
-            "content": "{question}"
+            "content": "Suggest some questions you can answer about this Wardley Map?"
+
         })
     st.session_state.messages.append(
         {
