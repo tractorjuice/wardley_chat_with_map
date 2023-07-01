@@ -1,7 +1,6 @@
 # Importing required packages
 import streamlit as st
 import requests
-from streamlit_chat import message
 import openai
 import requests
 
