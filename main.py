@@ -12,17 +12,17 @@ OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 #MODEL = "gpt-3.5-turbo-0613"
 #MODEL = "gpt-3.5-turbo-16k"
 #MODEL = "gpt-3.5-turbo-16k-0613"
-MODEL = "gpt-4"
-#MODEL = "gpt-4-0613"
+#MODEL = "gpt-4"
+MODEL = "gpt-4-0613"
 #MODEL = "gpt-4-32k-0613"
 
 st.set_page_config(page_title="Chat with your Wardley Map")
 st.sidebar.title("Chat with Map")
-st.divider()
+st.sidebar.divider()
 st.sidebar.markdown("Developed by Mark Craddock](https://twitter.com/mcraddock)", unsafe_allow_html=True)
 st.sidebar.markdown("Current Version: 0.1.4")
 st.sidebar.markdown("Using GPT-4 API")
-st.divider()
+st.sidebar.divider()
 st.sidebar.markdown("## Enter Map ID")
     
 def get_initial_message():
