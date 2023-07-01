@@ -109,7 +109,7 @@ if query := st.chat_input("Ask a question about this map?"):
         message_placeholder = st.empty()
         full_response = ""
         for response in openai.ChatCompletion.create(
-            model=st.session_state["openai_model"],
+            model=MODEL,
             messages=[
                 {"role": m["role"], "content": m["content"]}
                 for m in st.session_state.messages
