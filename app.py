@@ -43,9 +43,6 @@ st.sidebar.write("Examples:\n\ngQuu7Kby3yYveDngy2\n\nxi4JEUqte7XRWjjhgQ\n\nMOSCN
 st.sidebar.divider()
     
 if st.session_state.get('current_map_id') != map_id:
-    del st.session_state['messages']
-    st.session_state['past'] = []
-    st.session_state['generated'] = []
     st.session_state['current_map_id'] = map_id
     query = "Suggest some questions you can answer about this Wardley Map?"
     st.session_state['map_text'] = get_map_data()
@@ -80,11 +77,11 @@ if "messages" not in st.session_state:
             2. What are the main user needs the map is addressing, and have all relevant user needs been identified?
             3. Are the components correctly placed within the map based on their evolutions (Genesis, Custom Built, Product/Rental, Commodity)?
             4. What linkages exist between the components and how do they interact within the value chain?
-             5. Can you identify any market trends or competitor activities that could impact the positioning of the components?
-             6. Are there any potential inefficiencies or improvements that could be made in the value chain depicted in the map?
-             7. How does your organization take advantage of upcoming opportunities or mitigate risks, considering the layout and components' evolutions on the map?
-             8. Are there any areas where innovation or disruption could significantly alter the landscape represented in the map?
-             It is essential to provide the actual Wardley Map in question to provide a more accurate, in-depth analysis of specific components or insights tailored to your map.
+            5. Can you identify any market trends or competitor activities that could impact the positioning of the components?
+            6. Are there any potential inefficiencies or improvements that could be made in the value chain depicted in the map?
+            7. How does your organization take advantage of upcoming opportunities or mitigate risks, considering the layout and components' evolutions on the map?
+            8. Are there any areas where innovation or disruption could significantly alter the landscape represented in the map?
+            It is essential to provide the actual Wardley Map in question to provide a more accurate, in-depth analysis of specific components or insights tailored to your map.
             """
         })
     
