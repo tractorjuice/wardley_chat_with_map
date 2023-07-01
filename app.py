@@ -42,7 +42,7 @@ if 'map_text' not in st.session_state:
 if st.session_state.get('current_map_id') != map_id:
     st.session_state['current_map_id'] = map_id
     query = "Suggest some questions you can answer about this Wardley Map?"
-    st.session_state['map_text'] = get_map_data()
+    st.session_state['map_text'] = get_map_data(map_id)
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
