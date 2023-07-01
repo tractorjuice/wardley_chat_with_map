@@ -24,17 +24,36 @@ st.sidebar.markdown("Current Version: 0.1.4")
 st.sidebar.markdown("Using GPT-4 API")
 st.sidebar.divider()
 st.sidebar.markdown("## Enter Map ID")
+
+if "openai_model" not in st.session_state:
+    st.session_state["openai_model"] = MODEL
+
+if 'map_text' not in st.session_state:
+    st.session_state['map_text'] = []
     
-def get_initial_message():
-    query = "Suggest some questions you can answer about this Wardley Map?"
+def get_map_data():
     url = f"https://api.onlinewardleymaps.com/v1/maps/fetch?id={map_id}"
     response = requests.get(url)
     map_data = response.json()
     map_text = map_data["text"]
-    st.session_state['map_text'] = map_text
+    return map_text
     
-    messages = [
-        {
+map_id = st.sidebar.text_input("Enter the ID of the Wardley Map:", value="7OPuuDEWFoyfj00TS1")
+st.sidebar.write("For https://onlinewardleymaps.com/#clone:OXeRWhqHSLDXfOnrfI")
+st.sidebar.write("Examples:\n\ngQuu7Kby3yYveDngy2\n\nxi4JEUqte7XRWjjhgQ\n\nMOSCNj9iXnXdbCutbl\n\nOXeRWhqHSLDXfOnrfI\n\nO42FCNodPW3UPaP8AD")
+st.sidebar.divider()
+    
+if st.session_state.get('current_map_id') != map_id:
+    del st.session_state['messages']
+    st.session_state['past'] = []
+    st.session_state['generated'] = []
+    st.session_state['current_map_id'] = map_id
+    query = "Suggest some questions you can answer about this Wardley Map?"
+    st.session_state['map_text'] = get_map_data()
+
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+    st.session_state.messages.append({
             "role": "system",
             "content": f"""
              As a chatbot, analyze the provided Wardley Map and offer insights and recommendations based on its components.
@@ -47,11 +66,13 @@ def get_initial_message():
              Offer guidance for potential improvements or adjustments to the map
              WARDLEY MAP: {map_text}
              """
-        },
+        })
+    st.session_state.messages.append(   
         {
             "role": "user",
             "content": "{question}"
-        },
+        })
+    st.session_state.messages.append(
         {
             "role": "assistant",
             "content": """
@@ -66,47 +87,7 @@ def get_initial_message():
              8. Are there any areas where innovation or disruption could significantly alter the landscape represented in the map?
              It is essential to provide the actual Wardley Map in question to provide a more accurate, in-depth analysis of specific components or insights tailored to your map.
             """
-        }
-    ]
-    return messages
-
-def get_chatgpt_response(messages, model=model):
-    response = openai.ChatCompletion.create(
-    model=model,
-    messages=messages
-    )
-    return response['choices'][0]['message']['content']
-
-def update_chat(messages, role, content):
-    messages.append({"role": role, "content": content})
-    return messages
-
-if 'generated' not in st.session_state:
-    st.session_state['generated'] = []
-    
-if 'past' not in st.session_state:
-    st.session_state['past'] = []
-
-if 'messages' not in st.session_state:
-    st.session_state['messages'] = []
-    
-if 'map_text' not in st.session_state:
-    st.session_state['map_text'] = []
-    
-query = st.text_input("Question: ", value="", key="input")
-    
-map_id = st.sidebar.text_input("Enter the ID of the Wardley Map:", value="7OPuuDEWFoyfj00TS1")
-st.sidebar.write("For https://onlinewardleymaps.com/#clone:OXeRWhqHSLDXfOnrfI")
-st.sidebar.write("Examples:\n\ngQuu7Kby3yYveDngy2\n\nxi4JEUqte7XRWjjhgQ\n\nMOSCNj9iXnXdbCutbl\n\nOXeRWhqHSLDXfOnrfI\n\nO42FCNodPW3UPaP8AD")
-st.divider()
-    
-if st.session_state.get('current_map_id') != map_id:
-    del st.session_state['messages']
-    st.session_state['past'] = []
-    st.session_state['generated'] = []
-    st.session_state['current_map_id'] = map_id
-    query = "Suggest some questions you can answer about this Wardley Map?"
-    st.session_state['messages'] = get_initial_message()
+        })
     
 title = ""
 
@@ -120,18 +101,28 @@ if 'map_text' in st.session_state:
         st.sidebar.markdown(f"### {title}")
     st.sidebar.code(st.session_state['map_text'])
 
-if query:
-    with st.spinner("thinking... this can take a while..."):
-        messages = st.session_state['messages']
-        messages = update_chat(messages, "user", query)
-        response = get_chatgpt_response(messages, MODEL)
-        messages = update_chat(messages, "assistant", response)
-        st.session_state.past.append(query)
-        st.session_state.generated.append(response)
-        del st.session_state["input"]
+for message in st.session_state.messages:
+    if message["role"] in ["user", "assistant"]:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
 
-if st.session_state['generated']:
+if query := st.chat_input("Ask a question about this map?"):
+    st.session_state.messages.append({"role": "user", "content": query})
+    with st.chat_message("user"):
+        st.markdown(query)
 
-    for i in range(len(st.session_state['generated'])-1, -1, -1):
-        message(st.session_state["generated"][i], key=str(i), avatar_style="shapes", seed=12)
-        message(st.session_state['past'][i], is_user=True, key=str(i) + '_user', avatar_style="shapes", seed=20)
+    with st.chat_message("assistant"):
+        message_placeholder = st.empty()
+        full_response = ""
+        for response in openai.ChatCompletion.create(
+            model=st.session_state["openai_model"],
+            messages=[
+                {"role": m["role"], "content": m["content"]}
+                for m in st.session_state.messages
+            ],
+            stream=True,
+        ):
+            full_response += response.choices[0].delta.get("content", "")
+            message_placeholder.markdown(full_response + "▌")
+        message_placeholder.markdown(full_response)
+    st.session_state.messages.append({"role": "assistant", "content": full_response})
