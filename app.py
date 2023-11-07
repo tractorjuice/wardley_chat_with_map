@@ -8,14 +8,19 @@ import requests
 API_ENDPOINT = "https://api.onlinewardleymaps.com/v1/maps/fetch?id="
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 promptlayer.api_key = st.secrets["PROMPTLAYER"]
-#MODEL = "gpt-3"
+
 #MODEL = "gpt-3.5-turbo"
+#MODEL = "gpt-3.5-turbo-0301"
 #MODEL = "gpt-3.5-turbo-0613"
-#MODEL = "gpt-3.5-turbo-16k"
-MODEL = "gpt-3.5-turbo-16k-0613"
+#MODEL = "gpt-3.5-turbo-1106"
+MODEL = "gpt-3.5-turbo-16k"
+#MODEL = "gpt-3.5-turbo-16k-0613"
 #MODEL = "gpt-4"
 #MODEL = "gpt-4-0613"
+#MODEL = "gpt-4-0613"
 #MODEL = "gpt-4-32k-0613"
+#MODEL = "gpt-4-1106-preview"
+#MODEL = "gpt-4-vision-preview"
 
 # Swap out your 'import openai'
 openai = promptlayer.openai
@@ -24,8 +29,8 @@ st.set_page_config(page_title="Chat with your Wardley Map")
 st.sidebar.title("Chat with Map")
 st.sidebar.divider()
 st.sidebar.markdown("Developed by Mark Craddock](https://twitter.com/mcraddock)", unsafe_allow_html=True)
-st.sidebar.markdown("Current Version: 0.1.4")
-st.sidebar.markdown("Using GPT-4 API")
+st.sidebar.markdown("Current Version: 0.1.5")
+st.sidebar.markdown("Using gpt-3.5-turbo-16k API")
 st.sidebar.divider()
 st.sidebar.markdown("## Enter Map ID")
 
